@@ -47,25 +47,50 @@ npm run dev
 
 ## Deploy to Production
 
-### Backend → Fly.io (Free)
+### Backend → Render (Free)
 
 ```bash
-# 1. Install Fly CLI
-curl -L https://fly.io/install.sh | sh
+# 1. Install Render CLI
+brew tap render-oss/render && brew install render
 
 # 2. Login
-fly auth login
+render login
 
-# 3. Inside project root, deploy server
-cd server
-fly launch --name pokerplanner-server --region sin
-fly deploy
+# 3. Set workspace
+render workspace set <your-workspace-id>
 
-# 4. Set environment variable
-fly secrets set CLIENT_URL=https://your-app.vercel.app
+# 4. Deploy via Render API (render.yaml already included)
+curl -X POST https://api.render.com/v1/services \
+  -H "Authorization: Bearer <your-render-api-key>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "type": "web_service",
+    "name": "pokerplanner-server",
+    "ownerId": "<your-workspace-id>",
+    "repo": "https://github.com/<your-username>/pokerplanner",
+    "branch": "main",
+    "rootDir": "server",
+    "serviceDetails": {
+      "runtime": "node",
+      "buildCommand": "npm install",
+      "startCommand": "node src/index.js",
+      "plan": "free",
+      "region": "singapore",
+      "envSpecificDetails": {
+        "buildCommand": "npm install",
+        "startCommand": "node src/index.js"
+      }
+    },
+    "envVars": [
+      { "key": "NODE_ENV", "value": "production" },
+      { "key": "CLIENT_URL", "value": "https://your-app.vercel.app" }
+    ]
+  }'
 ```
 
-Your backend URL will be: `https://pokerplanner-server.fly.dev`
+Your backend URL will be: `https://pokerplanner-server.onrender.com`
+
+> **Note:** Render's free tier spins down after 15 min of inactivity. The first connection after idle may take ~30 seconds to wake up.
 
 ---
 
