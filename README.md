@@ -7,10 +7,10 @@ Real-time planning poker for agile teams. No account needed.
 ```
 pokerplanner/
 ├── client/          # React + Vite frontend  → deploy to Vercel
-├── server/          # Express + Socket.io    → deploy to Fly.io
+├── server/          # Express + Socket.io    → deploy to Render
 ├── package.json     # Root workspace config
-├── vercel.json      # Vercel deploy config
-└── fly.toml         # Fly.io deploy config
+├── render.yaml      # Render deploy config
+└── vercel.json      # Vercel deploy config
 ```
 
 ---
