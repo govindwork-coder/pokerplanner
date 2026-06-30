@@ -1,0 +1,22 @@
+# fly.toml — deploy Node.js backend to Fly.io free tier
+app = "pokerplanner-server"
+primary_region = "sin"   # Singapore — closest to India
+
+[build]
+  # Fly auto-detects Node.js, no Dockerfile needed
+
+[env]
+  PORT = "3001"
+  NODE_ENV = "production"
+
+[http_service]
+  internal_port = 3001
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+
+[[vm]]
+  memory = "256mb"
+  cpu_kind = "shared"
+  cpus = 1

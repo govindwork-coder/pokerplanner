@@ -1,0 +1,296 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ═══════════════════════════════════
+   DARK MODE (default)
+═══════════════════════════════════ */
+:root {
+  --bg:            #0a0a0a;
+  --bg-alt:        #0d0d0d;
+  --surface:       #111111;
+  --surface2:      #1a1a1a;
+  --border-lo:     #1a1a1a;
+  --border:        #2a2a2a;
+  --border-hi:     #3a3a3a;
+  --text:          #f0f0f0;
+  --text-2:        #c8c8c8;
+  --text-3:        #888888;
+  --text-4:        #555555;
+  --text-5:        #3d3d3d;
+  --ink:           #ffffff;
+  --ink-inv:       #0a0a0a;
+  --card-face:     #ffffff;
+  --card-ink:      #0a0a0a;
+  --card-suit-dim: #2a2a2a;
+  --card-corner:   #333333;
+  --spinner-track: #1e1e1e;
+  --spinner-head:  #ffffff;
+  --shadow-card:   rgba(0,0,0,0.8);
+  --btn-primary-bg: #ffffff;
+  --btn-primary-fg: #0a0a0a;
+  --btn-primary-border: #ffffff;
+  --btn-primary-hover-fg: #ffffff;
+  --btn-primary-hover-shadow: rgba(255,255,255,0.08);
+  --radius:    4px;
+  --radius-lg: 8px;
+  --estimating-color: #e03535;
+}
+
+/* ═══════════════════════════════════
+   LIGHT MODE — vintage parchment
+   inspired by Ace of Spades card
+═══════════════════════════════════ */
+[data-theme="light"] {
+  --bg:            #ede0c4;
+  --bg-alt:        #e5d5b0;
+  --surface:       #f5ead6;
+  --surface2:      #ede0c4;
+  --border-lo:     #d9c9a8;
+  --border:        #c4a97a;
+  --border-hi:     #a68a5b;
+  --text:          #1a1008;
+  --text-2:        #3d2b12;
+  --text-3:        #7a6040;
+  --text-4:        #9a7d52;
+  --text-5:        #b09a72;
+  --ink:           #1a1008;
+  --ink-inv:       #f5ead6;
+  --card-face:     #faf4e6;
+  --card-ink:      #1a1008;
+  --card-suit-dim: #c4a97a;
+  --card-corner:   #7a6040;
+  --spinner-track: #d9c9a8;
+  --spinner-head:  #1a1008;
+  --shadow-card:   rgba(26,16,8,0.25);
+  --btn-primary-bg: #1a1008;
+  --btn-primary-fg: #f5ead6;
+  --btn-primary-border: #1a1008;
+  --btn-primary-hover-fg: #1a1008;
+  --btn-primary-hover-shadow: rgba(26,16,8,0.12);
+  --radius:    4px;
+  --radius-lg: 8px;
+  --estimating-color: var(--ink);
+}
+
+/* ═══════════════════════════════════
+   BASE
+═══════════════════════════════════ */
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.01em;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, h3 { font-family: 'Playfair Display', serif; }
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+  border: none;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+input {
+  font-family: inherit;
+  outline: none;
+}
+
+/* ── Buttons ── */
+.btn-primary {
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-fg);
+  padding: 12px 28px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 2px solid var(--btn-primary-border);
+  transition: all 0.2s ease;
+}
+.btn-primary:hover {
+  background: transparent;
+  color: var(--btn-primary-hover-fg);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 32px var(--btn-primary-hover-shadow);
+}
+.btn-primary:active { transform: translateY(0); }
+.btn-primary:disabled { opacity: 0.25; cursor: not-allowed; transform: none; }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-3);
+  padding: 10px 20px;
+  border-radius: var(--radius);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  border: 1px solid var(--border-hi);
+  text-transform: uppercase;
+}
+.btn-ghost:hover { color: var(--text); border-color: var(--ink); }
+
+/* ── Input ── */
+.input {
+  background: transparent;
+  border: 1px solid var(--border-hi);
+  color: var(--text);
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  font-size: 14px;
+  width: 100%;
+  transition: border-color 0.2s;
+}
+.input:focus { border-color: var(--ink); }
+.input::placeholder { color: var(--text-5); }
+
+/* ── Theme toggle button ── */
+.btn-theme {
+  background: transparent;
+  border: 1px solid var(--border-hi);
+  color: var(--text-3);
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+.btn-theme:hover { color: var(--text); border-color: var(--ink); }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border-hi); border-radius: 2px; }
+
+/* ── Animations ── */
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp 0.4s ease forwards; }
+
+/* ── Noise overlay (dark mode only) ── */
+:root body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.018;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+}
+[data-theme="light"] body::after { opacity: 0.04; }
+
+/* ══════════════════════════════════════
+   CARD FLIP — 3D reveal animation
+══════════════════════════════════════ */
+
+/* Container that provides the 3D perspective */
+.flip-scene {
+  perspective: 900px;
+  width: 80px;
+  height: 112px;
+  flex-shrink: 0;
+}
+
+/* The card element that rotates */
+.flip-card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 7px;
+}
+
+/* Flipped state — triggered by JS class */
+.flip-card.is-flipped {
+  transform: rotateY(180deg);
+}
+
+/* Shared face styles */
+.flip-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 7px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+}
+
+/* ── Back face (hidden value, card pattern) ── */
+.flip-back {
+  background: var(--ink);
+  border: 1px solid var(--border-hi);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Inner border pattern on card back */
+.flip-back-inner {
+  width: calc(100% - 10px);
+  height: calc(100% - 10px);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: rgba(255,255,255,0.2);
+  font-family: serif;
+}
+
+[data-theme="light"] .flip-back {
+  background: var(--border-hi);
+}
+[data-theme="light"] .flip-back-inner {
+  border-color: rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.35);
+}
+
+/* Empty (not-yet-voted) card placeholder */
+.flip-back.is-empty {
+  background: transparent;
+  border: 1px dashed var(--border);
+}
+.flip-back.is-empty .flip-back-inner {
+  border: none;
+  color: var(--border-hi);
+  font-size: 18px;
+}
+
+/* ── Front face (revealed value) ── */
+.flip-front {
+  background: var(--card-face);
+  border: 1px solid var(--border-hi);
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px var(--shadow-card);
+}
+
+/* Stagger flip animation per card */
+.flip-card.stagger-1  { transition-delay: 0ms;   }
+.flip-card.stagger-2  { transition-delay: 80ms;  }
+.flip-card.stagger-3  { transition-delay: 160ms; }
+.flip-card.stagger-4  { transition-delay: 240ms; }
+.flip-card.stagger-5  { transition-delay: 320ms; }
+.flip-card.stagger-6  { transition-delay: 400ms; }
+.flip-card.stagger-7  { transition-delay: 480ms; }
+.flip-card.stagger-8  { transition-delay: 560ms; }
+
