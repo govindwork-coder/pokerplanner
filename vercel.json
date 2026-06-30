@@ -2,8 +2,5 @@
   "buildCommand": "npm run build --workspace=client",
   "outputDirectory": "client/dist",
   "installCommand": "npm install",
-  "framework": "vite",
-  "env": {
-    "VITE_SERVER_URL": "https://YOUR-APP.fly.dev"
-  }
+  "framework": "vite"
 }

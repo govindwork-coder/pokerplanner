@@ -10,6 +10,8 @@ import IssuePanel from "../components/IssuePanel";
 import VoteResults from "../components/VoteResults";
 import ActionBar from "../components/ActionBar";
 
+const SERVER_URL = import.meta.env.VITE_SERVER_URL || "http://localhost:3001";
+
 export default function Room() {
   const { roomId } = useParams();
   const navigate = useNavigate();
@@ -77,7 +79,7 @@ export default function Room() {
     if (!joinName.trim()) return toast.error("Enter your name");
     setJoining(true);
     try {
-      const res = await fetch(`/api/rooms/${roomId}`);
+      const res = await fetch(`${SERVER_URL}/api/rooms/${roomId}`);
       if (!res.ok) { toast.error("Room not found or has expired"); navigate("/"); return; }
       sessionStorage.setItem("pp_name", joinName.trim());
       sessionStorage.setItem("pp_isHost", "false");

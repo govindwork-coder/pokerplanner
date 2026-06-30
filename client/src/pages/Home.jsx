@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useTheme } from "../useTheme";
 
+const SERVER_URL = import.meta.env.VITE_SERVER_URL || "http://localhost:3001";
+
 export default function Home() {
   const navigate = useNavigate();
   const { theme, toggle } = useTheme();
@@ -16,7 +18,7 @@ export default function Home() {
     if (!name.trim()) return toast.error("Enter your name");
     setLoading(true);
     try {
-      const res = await fetch("/api/rooms", {
+      const res = await fetch(`${SERVER_URL}/api/rooms`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ hostName: name.trim() }),
@@ -38,7 +40,7 @@ export default function Home() {
     if (!roomCode.trim()) return toast.error("Enter room code");
     setLoading(true);
     try {
-      const res = await fetch(`/api/rooms/${roomCode.trim().toUpperCase()}`);
+      const res = await fetch(`${SERVER_URL}/api/rooms/${roomCode.trim().toUpperCase()}`);
       if (!res.ok) { toast.error("Room not found"); return; }
       sessionStorage.setItem("pp_name", name.trim());
       sessionStorage.setItem("pp_isHost", "false");
