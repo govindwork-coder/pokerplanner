@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: pokerplanner-server
+    runtime: node
+    rootDir: server
+    buildCommand: npm install
+    startCommand: node src/index.js
+    plan: free
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: CLIENT_URL
+        value: https://pokerplanner-seven.vercel.app
